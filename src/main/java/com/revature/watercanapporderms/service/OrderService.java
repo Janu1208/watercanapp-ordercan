@@ -19,19 +19,20 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	Order order = new Order();
+	
+   @Autowired
+	StockService stockService;
 
 	@Transactional
 	public Order orderStock(OrderDTO orderDto) throws ServiceException {
 		Order result = null;        
-		order.setOrderCans(orderDto.getOrderCans());
-		order.setUserId(order.getUserId());
-		StockService stockService=new StockService();
+		
 		 List<StockDTO> stockList=stockService.findAllStocks();
 		 StockDTO stockInDB = stockList.get(0);
 		 int cansAvail=stockInDB.getAvailableCans();
 		if (order.getOrderCans() <= cansAvail) {
 			order.setOrderCans(orderDto.getOrderCans());
-			order.setUserId(orderDto.getUserId());
+			order.setUserId(order.getUserId());
 			order.setUserName(orderDto.getUserName());
 			order.setDate(LocalDateTime.now());
 			result = orderRepository.save(order);

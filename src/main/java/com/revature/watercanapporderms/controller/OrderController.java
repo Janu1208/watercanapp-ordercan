@@ -35,6 +35,7 @@ public class OrderController {
 			result = orderService.orderStock(orderDTO);
 			status = "Success";
 		} catch (Exception e) {
+			e.printStackTrace();
 			errorMessage = e.getMessage();
 		}
 		if (status != null) {
