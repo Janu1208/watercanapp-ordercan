@@ -28,7 +28,6 @@ public class StockService {
         for (StockDTO stockDTO : stockList) {
 			list.add(stockDTO);
 		}
-        System.out.println(stockList);
 		return list;
 	}
 	
