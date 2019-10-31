@@ -32,6 +32,7 @@ public class OrderService {
 		 StockDTO stockInDB = stockList.get(0);
 		 int cansAvail=stockInDB.getAvailableCans();
 		if (order.getOrderCans() <= cansAvail) {
+			System.out.println("Service If statement Called");
 			order.setUserName(orderDto.getUserName());
 			System.out.println("Before  Order Save:" +  order);
 			result = orderRepository.save(order);
