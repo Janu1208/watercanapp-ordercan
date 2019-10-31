@@ -1,6 +1,6 @@
 package com.revature.watercanapporderms.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,10 +22,10 @@ public class Order {
 
 	@Column(name = "user_id")
 	private int userId;
-	@Column(name="user_name")
+	@Column(name = "user_name")
 	private String userName;
 	@Column(name = "order_cans")
 	private Integer orderCans;
 	@Column(name = "ordered_date")
-	private LocalDateTime date;
+	private LocalDate dateTime = LocalDate.now();
 }

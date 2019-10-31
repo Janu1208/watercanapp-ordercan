@@ -1,6 +1,5 @@
 package com.revature.watercanapporderms.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -26,15 +25,15 @@ public class OrderService {
 	@Transactional
 	public Order orderStock(OrderDTO orderDto) throws ServiceException {
 		Order result = null;        
-		
+		order.setOrderCans(orderDto.getOrderCans());
+		order.setUserId(order.getUserId());
 		 List<StockDTO> stockList=stockService.findAllStocks();
 		 StockDTO stockInDB = stockList.get(0);
 		 int cansAvail=stockInDB.getAvailableCans();
+		 System.out.println(cansAvail);
+		 System.out.println(order.getOrderCans());
 		if (order.getOrderCans() <= cansAvail) {
-			order.setOrderCans(orderDto.getOrderCans());
-			order.setUserId(order.getUserId());
 			order.setUserName(orderDto.getUserName());
-			order.setDate(LocalDateTime.now());
 			result = orderRepository.save(order);
 			stockService.addStocks(orderDto);
 		} else {

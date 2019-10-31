@@ -20,15 +20,19 @@ public class StockService {
 
 	String apiUrl = "https://watercansapp-stock-ms.herokuapp.com/";
 	
-	public ArrayList<StockDTO> findAllStocks(){		
-        ResponseEntity<List> getForEntity = restTemplate.getForEntity(apiUrl+"/viewStock", List.class);
-        ArrayList<StockDTO> stockList = (ArrayList<StockDTO>) getForEntity.getBody();
+	public List<StockDTO> findAllStocks(){		
+        ResponseEntity<StockDTO[]> getForEntity = restTemplate.getForEntity(apiUrl+"/viewStock", StockDTO[].class);
+        StockDTO[] stockList = getForEntity.getBody();
+        List<StockDTO> list = new ArrayList<StockDTO>();
+        for (StockDTO stockDTO : stockList) {
+			list.add(stockDTO);
+		}
         System.out.println(stockList);
-		return stockList;
+		return list;
 	}
 	
 	void  addStocks(final OrderDTO orderDto){		
-        ResponseEntity<Void> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, void.class);
+        ResponseEntity<Object> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, Object.class);
         System.out.println(postForEntity);
 	}
 }

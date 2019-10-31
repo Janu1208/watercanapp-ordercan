@@ -1,7 +1,6 @@
 package com.revature.watercanapporderms.dto;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -12,5 +11,5 @@ public class OrderDTO {
 	private int userId;
 	private String userName;
 	private Integer orderCans;
-	private LocalDateTime date;
-}
+	private LocalDate dateTime;
+	}
