@@ -22,7 +22,6 @@ public class OrderService {
    @Autowired
 	StockService stockService;
 
-	@Transactional
 	public Order orderStock(OrderDTO orderDto) throws ServiceException {
 		Order result = null;  
 		Order order = new Order();
