@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.revature.watercanapporderms.dto.Message;
 import com.revature.watercanapporderms.dto.OrderDTO;
 import com.revature.watercanapporderms.dto.StockDTO;
 
@@ -32,7 +33,8 @@ public class StockService {
 	}
 	
 	void  addStocks(final OrderDTO orderDto){		
-        ResponseEntity<Object> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, Object.class);
-        System.out.println(postForEntity);
+		System.out.println(orderDto);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, String.class);
+        System.out.println(postForEntity.getBody());
 	}
 }

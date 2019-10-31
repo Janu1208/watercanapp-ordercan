@@ -17,24 +17,25 @@ import com.revature.watercanapporderms.repository.OrderRepository;
 public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
-	Order order = new Order();
+	
 	
    @Autowired
 	StockService stockService;
 
 	@Transactional
 	public Order orderStock(OrderDTO orderDto) throws ServiceException {
-		Order result = null;        
+		Order result = null;  
+		Order order = new Order();
 		order.setOrderCans(orderDto.getOrderCans());
-		order.setUserId(order.getUserId());
+		order.setUserId(orderDto.getUserId());
 		 List<StockDTO> stockList=stockService.findAllStocks();
 		 StockDTO stockInDB = stockList.get(0);
 		 int cansAvail=stockInDB.getAvailableCans();
-		 System.out.println(cansAvail);
-		 System.out.println(order.getOrderCans());
 		if (order.getOrderCans() <= cansAvail) {
 			order.setUserName(orderDto.getUserName());
+			System.out.println("Before  Order Save:" +  order);
 			result = orderRepository.save(order);
+			System.out.println("AfterSave:"  + result);
 			stockService.addStocks(orderDto);
 		} else {
 			throw new ServiceException("Invalid cans...please check available stock and re enter the value");
