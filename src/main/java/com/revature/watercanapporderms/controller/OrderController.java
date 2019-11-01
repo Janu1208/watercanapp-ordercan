@@ -1,8 +1,11 @@
 package com.revature.watercanapporderms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,4 +49,16 @@ public class OrderController {
 		}
 
 	}
+	
+	@GetMapping("viewOrders")
+	   @ApiOperation(value = "ViewOrders API")
+	   public List<Order> viewOrders() {
+	       List<Order> list = null;
+	       try {
+	           list = orderService.viewOrders();
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	       }
+	       return list;
+	   }
 }

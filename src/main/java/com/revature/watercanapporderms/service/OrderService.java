@@ -1,12 +1,8 @@
 package com.revature.watercanapporderms.service;
 
 import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.revature.watercanapporderms.dto.OrderDTO;
 import com.revature.watercanapporderms.dto.StockDTO;
 import com.revature.watercanapporderms.exception.ServiceException;
@@ -41,5 +37,14 @@ public class OrderService {
 			throw new ServiceException("Invalid cans...please check available stock and re enter the value");
 		}
 		return result;
+	}
+	
+	  public List<Order> viewOrders() throws ServiceException {
+	       List<Order> list = null;
+	       list = orderRepository.findAll();
+	       if (list == null) {
+	           throw new ServiceException("Unable to view orderlist");
+	       }
+	       return list;
 	}
 }
