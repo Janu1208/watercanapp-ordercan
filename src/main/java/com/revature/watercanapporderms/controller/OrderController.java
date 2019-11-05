@@ -34,7 +34,6 @@ public class OrderController {
 		String status = null;
 		Order result = null;
 		try {
-
 			result = orderService.orderStock(orderDTO);
 			status = "Success";
 		} catch (Exception e) {
