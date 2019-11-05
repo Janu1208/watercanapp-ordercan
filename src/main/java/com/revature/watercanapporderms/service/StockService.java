@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import com.revature.watercanapporderms.dto.OrderDTO;
 import com.revature.watercanapporderms.dto.StockDTO;
@@ -31,7 +32,11 @@ public class StockService {
 	
 	void  addStocks(final OrderDTO orderDto){		
 		System.out.println(orderDto);
-        ResponseEntity<String> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, String.class);
-        System.out.println(postForEntity.getBody());
+        try {
+			ResponseEntity<String> postForEntity = restTemplate.postForEntity(apiUrl+"/updateOrderedCans",orderDto, String.class);
+			System.out.println(postForEntity.getBody());
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		}
 	}
 }

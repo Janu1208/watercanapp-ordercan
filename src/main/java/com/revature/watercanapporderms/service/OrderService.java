@@ -27,9 +27,17 @@ public class OrderService {
 		 StockDTO stockInDB = stockList.get(0);
 		 int cansAvail=stockInDB.getAvailableCans();
 		if (order.getOrderCans() <= cansAvail) {
-			order.setUserName(orderDto.getUserName());
-			result = orderRepository.save(order);
-			stockService.addStocks(orderDto);
+			try {
+				order.setUserName(orderDto.getUserName());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				result = orderRepository.save(order);
+				stockService.addStocks(orderDto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			throw new ServiceException("Invalid cans...please check available stock and re enter the value");
 		}
