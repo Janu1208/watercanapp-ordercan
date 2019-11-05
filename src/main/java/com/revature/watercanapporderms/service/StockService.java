@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.revature.watercanapporderms.dto.Message;
 import com.revature.watercanapporderms.dto.OrderDTO;
 import com.revature.watercanapporderms.dto.StockDTO;
 
